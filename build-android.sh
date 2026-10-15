@@ -64,7 +64,7 @@ import android.util.Base64;
 
 public final class GatewayService extends Service {
  static final String URL = "http://127.0.0.1:8081";
- private volatile Process process;
+ private volatile java.lang.Process process;
  static void send(Context c, boolean stop) {
   Intent i=new Intent(c,GatewayService.class).setAction(stop?"stop":"start");
   if(stop) c.startService(i); else c.startForegroundService(i);
@@ -113,7 +113,7 @@ public final class GatewayService extends Service {
    pb.directory(dir(this)).redirectErrorStream(true);
    pb.environment().put("HOME",dir(this).getAbsolutePath());
    pb.environment().put("TMPDIR",getCacheDir().getAbsolutePath());
-   Process child=pb.start();process=child;
+   java.lang.Process child=pb.start();process=child;
    try(BufferedReader br=new BufferedReader(new InputStreamReader(child.getInputStream(),StandardCharsets.UTF_8))){String line;while((line=br.readLine())!=null)log(line);}
    log("exit code "+child.waitFor());
   }catch(Exception e){log("启动失败："+Log.getStackTraceString(e));}
