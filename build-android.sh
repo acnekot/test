@@ -3,7 +3,7 @@ set -euo pipefail
 git clone --depth 1 https://github.com/jasonxu114514/opencode2api.git upstream
 git -C upstream rev-parse HEAD > upstream-commit.txt
 mkdir -p app/src/main/jniLibs/arm64-v8a app/src/main/java/dev/catsuki/opencode2api app/src/main/assets
-export CC="$ANDROID_HOME/ndk/26.3.11579264/toolchains/llvm/prebuilt/linux-x86_64/bin/aarch64-linux-android26-clang"
+export CC="$ANDROID_HOME/ndk/27.3.13750724/toolchains/llvm/prebuilt/linux-x86_64/bin/aarch64-linux-android26-clang"
 (cd upstream; CGO_ENABLED=1 GOOS=android GOARCH=arm64 go build -trimpath -ldflags="-s -w" -o ../app/src/main/jniLibs/arm64-v8a/libopencode2api.so ./cmd/opencode2api)
 file app/src/main/jniLibs/arm64-v8a/libopencode2api.so
 cp upstream/config.example.json app/src/main/assets/config.example.json
