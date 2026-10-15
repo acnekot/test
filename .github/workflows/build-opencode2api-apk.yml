@@ -29,7 +29,9 @@ jobs:
 
       - name: Install Android platform and NDK
         run: |
-          echo "ANDROID_HOME=$ANDROID_HOME"; ls -la "$ANDROID_HOME"\n          sdkmanager --install "platforms;android-35" "build-tools;35.0.0" "ndk;26.3.11579264"
+          echo "ANDROID_HOME=$ANDROID_HOME"
+          ls -la "$ANDROID_HOME/ndk" || true
+          sdkmanager --install "platforms;android-35" "build-tools;35.0.0" "ndk;26.3.11579264"
 
       - name: Set up Gradle
         uses: gradle/actions/setup-gradle@v4
